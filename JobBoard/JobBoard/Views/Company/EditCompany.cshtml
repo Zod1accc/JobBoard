@@ -1,0 +1,120 @@
+﻿@model CompanyViewModel
+
+<section class="section-hero overlay inner-page bg-image" style="background-image: url('/assets/images/hero_1.jpg');" id="home-section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-7">
+				<h1 class="text-white font-weight-bold">Edit A Company</h1>
+				<div class="custom-breadcrumbs">
+					<a href="#">Home</a> <span class="mx-2 slash">/</span>
+					<a href="#">Job</a> <span class="mx-2 slash">/</span>
+					<span class="text-white"><strong>Edit A Company</strong></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+<section class="site-section">
+	<div class="container">
+		<div class="row align-items-center mb-5">
+			<div class="col-lg-8 mb-4 mb-lg-0">
+				<div class="d-flex align-items-center">
+					<div>
+						<h2>Edit A Company</h2>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="row">
+					@*<div class="col-6">
+					<a href="#" class="btn btn-block btn-light btn-md"><span class="icon-open_in_new mr-2"></span>Preview</a>
+					</div>*@
+
+				</div>
+			</div>
+		</div>
+		<div class="row mb-5">
+			<div class="col-lg-12">
+				<form asp-action="EditCompany" id="editCompanyForm" class="p-4 p-md-5 border rounded" method="post" enctype="multipart/form-data">
+
+					<h3 class="text-black my-5 border-bottom pb-2">Company Details</h3>
+					<div class="form-group">
+						<label asp-for="Name">Company Name</label>
+						<input class="form-control" asp-for="Name" placeholder="e.g. New York">
+						<span asp-validation-for="Name" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="Tagline">Tagline (Optional)</label>
+						<input class="form-control" asp-for="Tagline" placeholder="e.g. New York">
+						<span asp-validation-for="Tagline" class="text-danger"></span>
+
+					</div>
+					<div class="form-group">
+						<label asp-for="Desc">Company Description (Optional)</label>
+						@*<div class="editor" id="editor-2">
+						</div>*@
+						<textarea asp-for="Desc" id="editorId"></textarea>
+						<span asp-validation-for="Desc" class="text-danger"></span>
+
+					</div>
+					<div class="form-group">
+						<label asp-for="WebsiteLink">Website (Optional)</label>
+						<input class="form-control" asp-for="WebsiteLink" placeholder="https:///">
+						<span asp-validation-for="WebsiteLink" class="text-danger"></span>
+
+					</div>
+					<div class="form-group">
+						<label asp-for="Facebook">Facebook Username (Optional)</label>
+						<input asp-for="Facebook" class="form-control" placeholder="Facebook link">
+						<span asp-validation-for="Facebook" class="text-danger"></span>
+
+					</div>
+					<div class="form-group">
+						<label asp-for="Twitter">Twitter Username (Optional)</label>
+						<input asp-for="Twitter" class="form-control" placeholder="Twitter link">
+						<span asp-validation-for="Twitter" class="text-danger"></span>
+
+					</div>
+					<div class="form-group">
+						<label asp-for="Linkedin">Linkedin Username (Optional)</label>
+						<input class="form-control" asp-for="Linkedin" placeholder="Linkedin link">
+						<span asp-validation-for="Linkedin" class="text-danger"></span>
+
+					</div>
+					<div class="form-group">
+						<label asp-for="ImageFile">Change Logo</label> <br>
+						<label class="btn btn-primary btn-md btn-file">
+							Browse File<input asp-for="ImageFile" hidden>
+						</label>
+						<img src="~/uploads/companies/@Model?.LogoImage" style="
+    width: 170px;
+    height: 108px;
+    margin-left: 30px;
+    background-position: center;
+" />
+						<span asp-validation-for="ImageFile" class="text-danger"></span>
+
+					</div>
+					<input asp-for="CompanyId" value="@Model.CompanyId" hidden />
+				</form>
+			</div>
+		</div>
+		<div class="row align-items-center mb-5">
+			<div class="col-lg-4 ml-auto">
+				<div class="row">
+					<div class="col-6">
+						<a href="#" class="btn btn-block btn-light btn-md"><span class="icon-open_in_new mr-2"></span>Preview</a>
+					</div>
+					<div class="col-6">
+						<button type="submit" form="editCompanyForm" class="btn btn-block btn-primary btn-md">Save Job</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+

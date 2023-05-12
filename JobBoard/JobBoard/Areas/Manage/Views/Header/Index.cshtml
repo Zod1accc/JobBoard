@@ -1,0 +1,83 @@
+﻿@model HeaderIndexVM
+@{
+	int count = 0;
+}
+
+<div class="d-flex justify-content-between container-fluid">
+	<h3>Header</h3>
+	<div class="col-auto">
+		@*<a asp-action="create" asp-controller="banner" class="btn btn-soft-success"><i class="ri-add-circle-line align-middle me-1"></i> Add Banner</a>*@
+	</div>
+</div>
+
+<!-- Tables Without Borders -->
+<table class="table table-borderless table-nowrap mt-3">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">Key</th>
+			<th scope="col">Value</th>
+			<th scope="col"></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.headerItems)
+		{
+			count++;
+			<tr>
+				<th scope="row">@count</th>
+				<td>@item.Key</td>
+				<td>@item.Value</td>
+				<td>
+					<div class="hstack gap-3 fs-15">
+						<a asp-action="update" asp-controller="banner" asp-route-id="@item.Id" class="btn btn-outline-info link-primary">Update@*<i class="ri-settings-4-line"></i>*@</a>
+						@*<a asp-action="delete" asp-controller="banner" asp-route-id="@item.Id" class="link-danger"><i class="ri-delete-bin-5-line"></i></a>*@
+					</div>
+				</td>
+			</tr>
+		}
+		<tr>
+			<th scope="row">@(count++)</th>
+			<td>Image</td>
+			<td>
+			<img src="~/uploads/header/@ViewBag.Image?" style="width:100px" />
+			</td>
+			<td>
+				<button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+					Update
+				</button>
+			</td>
+		</tr>
+		
+
+
+		<!-- Button trigger modal -->
+		
+
+		<!-- Modal -->
+		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form id="headerImage" asp-action="HeaderImage" method="post" enctype="multipart/form-data">
+							<div>
+								<label asp-for="ImageFile" class="form-label">Header Imaage File</label>
+								<input id="myInput" asp-for="ImageFile" class="form-control">
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<button type="submit" form="headerImage" class="btn btn-primary" id="changeButtn">Change</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</tbody>
+</table>

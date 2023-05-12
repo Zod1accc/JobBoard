@@ -1,0 +1,99 @@
+﻿
+
+@model IndexViewModel
+
+@{
+	int count = 0;
+	string search = (string)ViewBag.Search;
+}
+
+
+<div class="d-flex justify-content-between container-fluid" style="width:200px;margin-left:auto">
+	<h3>Company</h3>
+	<div class="col-auto">
+		@*<a asp-action="create" asp-controller="banner" class="btn btn-soft-success"><i class="ri-add-circle-line align-middle me-1"></i> Add Banner</a>*@
+	</div>
+</div>
+<form method="get" asp-controller="company" asp-action="index">
+	@*<span class="col-md-3">
+		<label for="validationDefault04" class="form-label">State</label>
+		<select class="form-select" id="validationDefault04" required>
+			<option selected disabled value="">Choose...</option>
+			<option>...</option>
+		</select>
+	</span>*@
+	<div class="input-group" style="width:400px;margin-left:850px">
+		<input value="@search" type="text" name="search" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
+		<button class="btn btn-outline-success" type="submit" id="button-addon2">Search</button>
+	</div>
+</form>
+
+<!-- Tables Without Borders -->
+<table class="table table-borderless table-nowrap mt-4">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">Image</th>
+			<th scope="col">Name</th>
+			<th scope="col">Status</th>
+			<th scope="col">
+				Company website
+			</th>
+			<th scope="col">View</th>
+			<th scope="col">Action</th>
+			@*<th scope="col"></th>*@
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.companies)
+		{
+			count++;
+			<tr>
+				<th scope="row">@count</th>
+				<td>
+					<img class="img-fluid" style="width:100px" src="~/uploads/companies/@item?.LogoImage" />
+				</td>
+				<td>@item.Name </td>
+
+				@if (!item.IsActive == true)
+				{
+					<td><span class="badge badge-soft-danger">Not Active</span></td>
+				}
+				else
+				{
+					<td><span class="badge badge-soft-success">Active</span></td>
+				}
+				@if (!item.IsView == true)
+				{
+					<td><span class="badge badge-soft-danger">Not Viewed</span></td>
+				}
+				else
+				{
+					<td><span class="badge badge-soft-success">Viewed</span></td>
+				}
+				<td>
+					<i class="ri-external-link-line me-1"></i><a href="@item.WebsiteLink" target="_blank">Site link</a>
+				</td>
+				<td>
+					<div class="hstack gap-3 fs-15">
+						<a asp-action="companydetail" asp-controller="company" asp-route-id="@item.Id" class="link-primary"><i class=" ri-eye-line"></i></a>
+						@*<a asp-action="detail" asp-controller="users" asp-route-id="@item.Id" class="link-primary"><i class="ri-settings-4-line"></i></a>
+						<a asp-action="delete" asp-controller="users" asp-route-id="@item.Id" class="link-danger delete-item-btn"><i class="ri-delete-bin-5-line"></i></a>*@
+					</div>
+				</td>
+			</tr>
+		}
+
+
+	</tbody>
+</table>
+
+
+    
+
+
+
+
+
+
+

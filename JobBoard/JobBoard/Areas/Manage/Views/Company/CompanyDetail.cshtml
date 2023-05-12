@@ -1,0 +1,107 @@
+﻿@model CompanyDetailviewModel
+
+<div class="container-fluid">
+
+	<div class="card">
+		<div class="card-body">
+			<div class="row g-4">
+				<div class="col-lg-4">
+					<div class="sticky-side-div">
+						<div class="card ribbon-box border shadow-none right">
+							@*<div class="ribbon-two ribbon-two-danger"><span><i class="ri-fire-fill align-bottom"></i> Hot</span></div>*@
+							<img src="~/uploads/companies/@Model.Company?.LogoImage" alt="" class="img-fluid rounded">
+
+						</div>
+						<div class="hstack gap-2">
+							@if(Model.Company.IsActive == true)
+							{
+								<a asp-action="companydeactivate" asp-controller="company" asp-route-id="@Model.Company.Id" class="btn btn-warning w-100 comopanydeactive">Deactive</a>
+
+							}
+							else
+							{
+								<a asp-action="companyactivate" asp-controller="company" asp-route-id="@Model.Company.Id" class="btn btn-success w-100 comopanyactive">Active</a>
+								
+							}
+						</div>
+					</div>
+				</div><!--end col-->
+				<div class="col-lg-8">
+					<div>
+						<div class="dropdown float-end">
+							<button class="btn btn-ghost-primary btn-icon dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+								<i class="ri-more-fill align-middle fs-16"></i>
+							</button>
+							<ul class="dropdown-menu dropdown-menu-end">
+								<li><a class="dropdown-item view-item-btn" href="javascript:void(0);"><i class="ri-eye-fill align-bottom me-2 text-muted"></i>View</a></li>
+								<li><a class="dropdown-item edit-item-btn" href="#showModal" data-bs-toggle="modal"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li>
+								<li><a class="dropdown-item remove-item-btn" data-bs-toggle="modal" href="#deleteRecordModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete</a></li>
+							</ul>
+						</div>
+						<h4>@Model.Company.Name</h4>
+						<div class="hstack gap-3 flex-wrap">
+							<div class="text-muted">Creators Fullname: <a href="#" class="text-primary fw-medium">@Model.User.Fullname</a></div>
+							<div class="vr"></div>
+							<div class="text-muted">Username : <span class="text-body fw-medium">@Model.User.UserName</span></div>
+							<div class="vr"></div>
+							<div class="text-muted">Published : <span class="text-body fw-medium">@Model.Company.CreatedDate</span></div>
+						</div>
+
+						<div class="row mt-4">
+							<div class="col-lg-3 col-sm-6">
+								<div class="p-2 border border-dashed rounded text-center">
+									<div>
+										<p class="text-muted fw-medium mb-1">Website link :</p>
+										<h5 class="fs-17 text-success mb-0"><i class="ri-external-link-line me-1"></i><a href="@Model.Company.WebsiteLink" target="_blank">Website Link</a></h5>
+									</div>
+								</div>
+							</div>
+							<!-- end col -->
+							@*<div class="col-lg-3 col-sm-6">
+								<div class="p-2 border border-dashed rounded text-center">
+									<div>
+										<p class="text-muted fw-medium mb-1">Highest bid</p>
+										<h5 class="fs-17 mb-0">104.63 ETH</h5>
+									</div>
+								</div>
+							</div>*@
+							<!-- end col -->
+							<div class="col-lg-3 col-sm-6">
+								<div class="p-2 border border-dashed rounded text-center">
+									<div>
+										<p class="text-muted fw-medium mb-1">Status</p>
+										<h5 class="fs-17 mb-0 @(Model.Company.IsActive == true ? "text-success":"text-danger")">@(Model.Company.IsActive == true ? "Active" : "Deactive")</h5>
+									</div>
+								</div>
+							</div>
+							<!-- end col -->
+							<div class="col-lg-3 col-sm-6">
+								<div class="p-2 border border-dashed rounded text-center">
+									<div>
+										<p class="text-muted fw-medium mb-1">Auction Ends:</p>
+										<h5 id="auction-time-1" class="mb-0"></h5>
+									</div>
+								</div>
+							</div><!-- end col -->
+						</div><!--end row-->
+						<div class="mt-4 text-muted">
+							<h5 class="fs-14">Description :</h5>
+							<p>@Html.Raw(Model.Company.Desc)</p>
+						</div>
+						<div class="mt-4 text-muted">
+							<h5 class="fs-14">Company Tagline :</h5>
+							<p>@Model.Company.Tagline</p>
+						</div>
+						
+					</div>
+				</div>
+				<!--end col-->
+			</div>
+			<!--end row-->
+		</div>
+	</div><!--end card-->
+
+</div>
+<!-- container-fluid -->
+
+

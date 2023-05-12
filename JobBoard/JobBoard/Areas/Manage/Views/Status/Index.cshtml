@@ -1,0 +1,112 @@
+﻿@model StatusViewModel
+@{
+	int count = 0;
+	//string error = (string)ViewBag.Errors;
+	
+}
+
+<div class="d-flex justify-content-between container-fluid">
+	<h3>Status</h3>
+	<div class="col-auto">
+		@*<a asp-action="create" asp-controller="banner" class="btn btn-soft-success"><i class="ri-add-circle-line align-middle me-1"></i> Add Banner</a>*@
+	</div>
+</div>
+
+@*@if (ViewBag.Errors is not null)
+{
+	<div class="alert alert-warning alert-dismissible fade show text-black" role="alert">
+		@error
+		A
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+}*@
+
+
+<!-- Tables Without Borders -->
+<table class="table table-borderless table-nowrap mt-3">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">Key</th>
+			<th scope="col">Value</th>
+			<th scope="col"></th>
+		</tr>
+	</thead>
+	<tbody>
+		
+		<tr>
+			<th scope="row">1</th>
+			<td>Title</td>
+			<td>@Model.Title</td>
+			<td>
+				<div class="hstack gap-3 fs-15">
+					<button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+						Update
+					</button>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row">2</th>
+			<td>Description</td>
+			<td>@Model.Desc</td>
+			<td>
+				<div class="hstack gap-3 fs-15">
+					<button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+						Update
+					</button>
+				</div>
+			</td>
+		</tr>
+
+
+		
+		<!-- Modal 1-->
+		<div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form id="statusTitleForm" asp-action="StatusUpdate" method="post" enctype="multipart/form-data">
+							<div>
+								<label asp-for="Title" class="form-label">Header Imaage File</label>
+								<input id="myInput" asp-for="Title" class="form-control">
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<button type="submit" form="statusTitleForm" class="btn btn-primary" id="changeButtn">Change</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--Modal 2-->
+		<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form id="statusDescForm" asp-action="StatusUpdate" method="post" enctype="multipart/form-data">
+							<div>
+								<label asp-for="Desc" class="form-label">Header Imaage File</label>
+								<input id="myInput" asp-for="Desc" class="form-control">
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<button type="submit" form="statusDescForm" class="btn btn-primary" id="changeButtn">Change</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</tbody>
+</table>
